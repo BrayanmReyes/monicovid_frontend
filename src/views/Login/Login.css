@@ -1,0 +1,106 @@
+.imgLogin {
+    background-color: #0AACB9;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+.login {
+    background-color: #C1EFEF;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+.logo {
+    display: block;
+    margin: auto;
+    margin-bottom: 1.5rem;
+}
+
+.logoLeft {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    transform: scale(0.5);
+}
+
+.form {
+    border-radius: 5%;
+    border-color: #09ACB8;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.formItem {
+    display: block;
+    margin: auto;
+    width: 60%;
+    margin-bottom: 1rem;
+}
+
+.formItemCols {
+    display: flex;
+    margin: auto;
+    width: 60%;
+}
+
+@media (max-width: 1200px) {
+    .formItem {
+        width: 85%;
+    }
+
+    .formItemCols {
+        width: 85%;
+    }
+}
+
+.input {
+    border-color: #09ACB8;
+    border-radius: 5%;
+}
+
+.button {
+    top: 50%;
+    left: 10%;
+    background-color: #F25270;
+    color: white;
+    width: 80%;
+    border-radius: 5%;
+    font-size: medium;
+    margin-top: 1rem;
+}
+
+.button:hover {
+    background: #ec3053;
+    border-color: #F25270;
+    color: white;
+}
+
+.button:focus {
+    background: #ec3053;
+    color: white;
+    border-color: #F25270;
+    box-shadow: 0 0 0 1px #09ACB8;
+}
+
+.button.loading {
+    color: white;
+    background: #ec3053
+        repeating-linear-gradient(
+            60deg,
+            transparent,
+            transparent 10px,
+            #b30424 10px,
+            #b30424 20px
+        );
+}
+
+.createAccount {
+    color: #F25270;
+    text-align: center;
+}
