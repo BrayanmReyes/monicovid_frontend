@@ -24,3 +24,10 @@ export const dniRules = () => {
     rules.push({ pattern: '^[0-9]{8}$', message: `Ingrese DNI válido` });
     return rules;
 }
+
+export const phoneRules = () => {
+    let rules = [];
+    rules.push({ required: true, message: `Ingrese teléfono` });
+    rules.push({ pattern: '^[0-9]{9}$', message: `Ingrese teléfono válido` });
+    return rules;
+}

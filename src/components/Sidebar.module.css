@@ -1,0 +1,13 @@
+.sidebar {
+    background: #0AACB9;
+}
+
+.menu {
+    color: red !important;
+    font-size: 1rem;
+    background: #0AACB9 !important;
+}
+
+.item:focus {
+    background-color: #F25270 !important;
+}

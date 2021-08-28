@@ -12,7 +12,7 @@ class AuthenticationService {
                 dni: data.dni,
                 type: type,
             }
-            const response = await axiosInstance.post('/profiles-api/users', newUser);
+            const response = await axiosInstance.post('/auth-api/register', newUser);
             return response;
         } catch(error) {
             console.log('error: ', error);
@@ -25,7 +25,32 @@ class AuthenticationService {
                 email: data.email,
                 password: data.password
             }
-            const response = await axiosInstance.post('/profiles-api/login', login);
+            const response = await axiosInstance.post('/auth-api/login', login);
+            return response;
+        } catch(error) {
+            console.log('error: ', error);
+        }
+    }
+
+    async forgotPassword(data) {
+        try {
+            const forgotPassword = {
+                email: data.email
+            }
+            const response = await axiosInstance.post('/auth-api/forgot-password', forgotPassword);
+            return response;
+        } catch(error) {
+            console.log('error: ', error);
+        }
+    }
+
+    async resetPassword(data) {
+        try {
+            const resetPassword = {
+                token: data.token,
+                password: data.password
+            }
+            const response = await axiosInstance.post('/auth-api/reset-password', resetPassword);
             return response;
         } catch(error) {
             console.log('error: ', error);
