@@ -20,6 +20,8 @@ function App() {
         <Route path={routes.ACCOUNT} component={Home} />
         <Route path={routes.CONTACTS} component={Home} />
         <Route path={routes.REPORTS} component={Home} />
+        <Route path={routes.RECOMMENDATIONS} component={Home} />
+        <Route path={routes.NEW_REPORT} component={Home} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

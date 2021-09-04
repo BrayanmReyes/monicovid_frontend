@@ -5,6 +5,8 @@ export default Object.freeze({
     RESET_PASSWORD: "/reset-password",
     HOME: "/home",
     REPORTS: "/reports",
+    NEW_REPORT: "/new-report",
     CONTACTS: "/contacts",
-    ACCOUNT: "/account"
+    ACCOUNT: "/account",
+    RECOMMENDATIONS: "/recommendations",
 });

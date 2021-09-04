@@ -4,22 +4,24 @@ import { TeamOutlined, FileDoneOutlined, MedicineBoxOutlined, UserOutlined, Menu
 import styles from './Sidebar.module.css';
 import routes from '../shared/routes';
 import { Switch, Route, useHistory } from 'react-router';
-import Reports from '../views/Reportes/Reports';
+import Reports from '../views/Reports/Reports';
 import Contacts from '../views/Contacts/Contacts';
 import Account from '../views/Account/Account';
+import Recommendations from '../views/Recommendations/Recommendations';
+import NewReport from '../views/Reports/NewReport';
 
-const Sidebar = () => {
+const PatientSidebar = () => {
     const { Header, Content, Footer, Sider } = Layout;
 
     const [collapsed, setCollapsed] = useState(false);
-    const [title, setTitle] = useState('Contactos');
+    const [title, setTitle] = useState('¡Bienvenido a Monicovid!');
 
     const toggle = () => { setCollapsed(!collapsed) }
 
     const history = useHistory();
 
     useEffect(() => {
-        history.push(routes.CONTACTS);
+        history.push(routes.RECOMMENDATIONS);
     }, []);
 
     const keySelected = (key) => {
@@ -30,8 +32,8 @@ const Sidebar = () => {
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider className={styles.sidebar} breakpoint="lg" collapsible trigger={null} collapsed={collapsed}>
-                <Menu theme="dark" className={styles.menu} defaultSelectedKeys={['2']} mode="inline" onSelect={(key) => keySelected(key)}>
-                    {/* <img src="/icon_32.png" alt="Monicovid logo"/> */}
+                <img style={{ margin: '1rem auto', display: 'block' }} src="/icon_64.png" alt="Monicovid logo"/>
+                <Menu theme="dark" className={styles.menu} mode="inline" onSelect={(key) => keySelected(key)}>
                     <Menu.Item className={styles.item} key="1" icon={<FileDoneOutlined />} title="Reportes" link={routes.REPORTS}>
                         Reportes
                     </Menu.Item>
@@ -47,7 +49,7 @@ const Sidebar = () => {
                 </Menu>
             </Sider>
             <Layout>
-                <Header style={{ backgroundColor: '#66D9D9', paddingLeft: '1rem', color: '#F25270' }}>
+                <Header style={{ backgroundColor: '#C1EFEF', paddingLeft: '1rem', color: '#F25270' }}>
                     <Row>
                         <Col xs={1} sm={1} md={1} lg={1} xl={1}>
                             { collapsed ? <Button icon={<MenuUnfoldOutlined />} onClick={() => toggle()} />
@@ -62,8 +64,14 @@ const Sidebar = () => {
                 </Header>
                 <Content>
                     <Switch>
+                        <Route path={routes.RECOMMENDATIONS}>
+                            <Recommendations></Recommendations>
+                        </Route>
                         <Route path={routes.REPORTS}>
                             <Reports></Reports>
+                        </Route>
+                        <Route path={routes.NEW_REPORT}>
+                            <NewReport></NewReport>
                         </Route>
                         <Route path={routes.CONTACTS}>
                             <Contacts></Contacts>
@@ -79,4 +87,4 @@ const Sidebar = () => {
     )
 }
 
-export default Sidebar
+export default PatientSidebar

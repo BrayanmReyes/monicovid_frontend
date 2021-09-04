@@ -1,0 +1,45 @@
+.button {
+    background-color: #F25270;
+    color: white;
+    border-radius: 5%;
+    font-size: medium;
+    margin-top: 1rem;
+}
+
+.button:hover {
+    background: #ec3053;
+    border-color: #F25270;
+    color: white;
+}
+
+.button:focus {
+    background: #ec3053;
+    color: white;
+    border-color: #F25270;
+    box-shadow: 0 0 0 1px #09ACB8;
+}
+
+.buttonNoMargin {
+    background-color: #F25270;
+    color: white;
+    border-radius: 5%;
+    font-size: medium;
+}
+
+.buttonNoMargin:hover {
+    background: #ec3053;
+    border-color: #F25270;
+    color: white;
+}
+
+.buttonNoMargin:focus {
+    background: #ec3053;
+    color: white;
+    border-color: #F25270;
+    box-shadow: 0 0 0 1px #09ACB8;
+}
+
+.step {
+    background: #ec3053;
+    color: white;
+}

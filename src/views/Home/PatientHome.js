@@ -1,10 +1,10 @@
 import React from 'react'
-import Sidebar from '../../components/Sidebar'
+import PatientSidebar from '../../components/PatientSidebar'
 
 const PatientHome = () => {
     return (
         <div>
-            <Sidebar></Sidebar>
+            <PatientSidebar></PatientSidebar>
         </div>
     )
 }
