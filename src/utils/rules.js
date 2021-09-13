@@ -12,6 +12,12 @@ export const passwordRules = () => {
     return rules;
 }
 
+export const passwordNotRequiredRules = () => {
+    let rules = [];
+    rules.push({ min: 8, message: `La contraseña debe tener por lo menos 8 caracteres` });
+    return rules;
+}
+
 export const defaultRules = (name) => {
     let rules = [];
     rules.push({ required: true, message: `Ingresa ${name}` });
@@ -28,6 +34,12 @@ export const dniRules = () => {
 export const phoneRules = () => {
     let rules = [];
     rules.push({ required: true, message: `Ingrese teléfono` });
+    rules.push({ pattern: '^[0-9]{9}$', message: `Ingrese teléfono válido` });
+    return rules;
+}
+
+export const phoneNotRequiredRules = () => {
+    let rules = [];
     rules.push({ pattern: '^[0-9]{9}$', message: `Ingrese teléfono válido` });
     return rules;
 }

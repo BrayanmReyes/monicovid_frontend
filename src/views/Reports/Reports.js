@@ -1,4 +1,4 @@
-import { Table, Button, Alert, Space, Tag } from 'antd'
+import { Table, Button, Alert, Space, Popconfirm } from 'antd'
 import Column from 'antd/lib/table/Column'
 import { PlusSquareOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react'
@@ -11,6 +11,9 @@ const Reports = () => {
     const history = useHistory();
 
     const [reports, setReports] = useState([]);
+    const [symptoms, setSymptoms] = useState([]);
+    const [alertType, setAlertType] = useState('info');
+    const [alertMessage, setAlertMessage] = useState('Registre reportes para poder hacer un seguimiento de su estado.');
 
     const newReport = () => {
         history.push(routes.NEW_REPORT);
@@ -20,27 +23,34 @@ const Reports = () => {
         const userId = sessionStorage.getItem('userId');
         MedicalService.getReportsByUserId(userId).then((response) => {
             const data = response.data;
-            data.forEach(d => {
-                d.hidden = true;
-                d.symptoms = [];
-            });
             setReports(data);
+            if (data.length > 0) {
+                MedicalService.getLastReportByUserId(userId).then((response) => {
+                    if (response.status === 200) {
+                        if (response.data.delicate_health) {
+                            setAlertType('error');
+                            setAlertMessage('Usted se encuentra delicado. Por favor acuda a un centro de salud');
+                        } else {
+                            setAlertType('success');
+                            setAlertMessage('Usted se encuentra bien.');
+                        }
+                    }
+                });
+            }
         });
+        
     }, []);
 
-    const symptoms = (reportId, index) => {
+    const getSymptoms = (reportId) => {
         MedicalService.getSymptomsByHealthReport(reportId).then((response) => {
-            reports[index].hidden = false;
-            setReports(reports);
-            console.log('reports: ', reports);
-            console.log('response: ', response);
+            setSymptoms(response.data);
         });
     }
 
     return (
         <>
             <div style={{ marginLeft: '5%', marginBottom: '2rem', marginTop: '2rem' }}>
-                <Alert type="success" description="Usted se encuentra bien" showIcon></Alert>
+                <Alert type={alertType} description={alertMessage} showIcon></Alert>
             </div>
             <div style={{ marginLeft: '5%', marginBottom: '2rem', marginTop: '2rem' }}>
                 <Button style={{ backgroundColor: '#F25270', color: 'white' }} icon={<PlusSquareOutlined />} onClick={() => newReport()}>
@@ -55,11 +65,14 @@ const Reports = () => {
                     <Column title="Síntomas" key="symptoms" render={
                         (text, report, index) => (
                             <Space size="middle">
-                                { reports[index].symptoms_quantity > 0 && reports[index].hidden &&
-                                    <Button className={styles.buttonNoMargin} type="primary" onClick={() => symptoms(reports[index].id, index)}>Ver</Button> }
-                                { reports[index].symptoms_quantity > 0 && !reports[index].hidden &&
-                                    <Tag color="#F25270">Holi</Tag> }
-                                { reports[index].symptoms_quantity === 0 && <p>No se reportaron</p> }
+                                { reports[index].symptoms_quantity > 0
+                                    ? <>
+                                        <Popconfirm cancelButtonProps={{ style: { display: 'none' } }} title={() => symptoms.map(s => s.name).join(", ")}>
+                                            <Button className={styles.buttonNoMargin} type="primary" onClick={() => getSymptoms(reports[index].id)}>Ver</Button>
+                                        </Popconfirm>
+                                      </>
+                                    : <p>No se reportaron</p>
+                                }
                             </Space>
                         )
                     } />

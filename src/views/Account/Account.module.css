@@ -1,0 +1,30 @@
+.form {
+    width: 80%;
+    margin: 5% auto;
+}
+
+.input {
+    border-color: #09ACB8;
+}
+
+.button {
+    background-color: #F25270;
+    color: white;
+    font-size: medium;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+    display: block;
+}
+
+.button:hover {
+    background: #ec3053;
+    border-color: #F25270;
+    color: white;
+}
+
+.button:focus {
+    background: #ec3053;
+    color: white;
+    border-color: #F25270;
+    box-shadow: 0 0 0 1px #09ACB8;
+}

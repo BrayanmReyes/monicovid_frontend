@@ -11,6 +11,15 @@ class MedicalService {
         }
     }
 
+    async getLastReportByUserId(userId) {
+        try {
+            const response = await axiosInstance.get(`/medical-monitoring-api/health_reports/last-report`, { params: { patient_id: userId }});
+            return response;
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    }
+
     async addReportsToUser(data, userId) {
         try {
             const newReport = {
