@@ -7,6 +7,8 @@ export default Object.freeze({
     REPORTS: "/reports",
     NEW_REPORT: "/new-report",
     CONTACTS: "/contacts",
-    ACCOUNT: "/account",
+    PATIENT_ACCOUNT: "/patient-account",
+    DOCTOR_ACCOUNT: "/doctor-account",
     RECOMMENDATIONS: "/recommendations",
+    GRAPHS: "/graphs",
 });

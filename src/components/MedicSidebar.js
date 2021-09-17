@@ -1,17 +1,12 @@
 import { Button, Layout, Menu, Row, Col } from 'antd';
-import { React, useState, useEffect } from 'react'
-import { TeamOutlined, FileDoneOutlined, MedicineBoxOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react'
+import { MedicineBoxOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import styles from './Sidebar.module.css';
 import routes from '../shared/routes';
 import { Switch, Route, useHistory } from 'react-router';
-import Reports from '../views/Reports/Reports';
-import Contacts from '../views/Contacts/Contacts';
-import PatientAccount from '../views/Account/PatientAccount';
-import Recommendations from '../views/Recommendations/Recommendations';
-import NewReport from '../views/Reports/NewReport';
-import Graphs from '../views/Reports/Graphs';
+import DoctorAccount from '../views/Account/DoctorAccount';
 
-const PatientSidebar = () => {
+const MedicSidebar = () => {
     const { Header, Content, Footer, Sider } = Layout;
 
     const [collapsed, setCollapsed] = useState(false);
@@ -22,29 +17,29 @@ const PatientSidebar = () => {
     const history = useHistory();
 
     useEffect(() => {
-        history.push(routes.RECOMMENDATIONS);
+        history.push(routes.DOCTOR_ACCOUNT);
     }, []);
 
     const keySelected = (key) => {
         history.push(key.item.props.link);
         setTitle(key.item.props.title);
     }
-
+    
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider className={styles.sidebar} breakpoint="lg" collapsible trigger={null} collapsed={collapsed}>
-                <img style={{ margin: '1rem auto', display: 'block' }} src="/icon_64.png" alt="Monicovid logo" onClick={() => history.push(routes.RECOMMENDATIONS)} />
+                <img style={{ margin: '1rem auto', display: 'block' }} src="/icon_64.png" alt="Monicovid logo"/>
                 <Menu theme="dark" className={styles.menu} mode="inline" onSelect={(key) => keySelected(key)}>
-                    <Menu.Item className={styles.item} key="1" icon={<FileDoneOutlined />} title="Reportes" link={routes.REPORTS}>
+                    {/* <Menu.Item className={styles.item} key="1" icon={<FileDoneOutlined />} title="Reportes" link={routes.REPORTS}>
                         Reportes
                     </Menu.Item>
                     <Menu.Item className={styles.item} key="2" icon={<TeamOutlined />} title="Contactos" link={routes.CONTACTS}>
                         Contactos
+                    </Menu.Item> */}
+                    <Menu.Item className={styles.item} key="1" icon={<MedicineBoxOutlined />} title="Pacientes">
+                        Pacientes
                     </Menu.Item>
-                    <Menu.Item className={styles.item} key="3" icon={<MedicineBoxOutlined />} title="Centros médicos">
-                        Centros médicos
-                    </Menu.Item>
-                    <Menu.Item className={styles.item} key="4" icon={<UserOutlined />} title="Cuenta" link={routes.PATIENT_ACCOUNT}>
+                    <Menu.Item className={styles.item} key="2" icon={<UserOutlined />} title="Cuenta" link={routes.DOCTOR_ACCOUNT}>
                         Cuenta
                     </Menu.Item>
                 </Menu>
@@ -65,23 +60,8 @@ const PatientSidebar = () => {
                 </Header>
                 <Content>
                     <Switch>
-                        <Route path={routes.RECOMMENDATIONS}>
-                            <Recommendations></Recommendations>
-                        </Route>
-                        <Route path={routes.REPORTS}>
-                            <Reports></Reports>
-                        </Route>
-                        <Route path={routes.NEW_REPORT}>
-                            <NewReport></NewReport>
-                        </Route>
-                        <Route path={routes.CONTACTS}>
-                            <Contacts></Contacts>
-                        </Route>
-                        <Route path={routes.PATIENT_ACCOUNT}>
-                            <PatientAccount></PatientAccount>
-                        </Route>
-                        <Route path={routes.GRAPHS}>
-                            <Graphs></Graphs>
+                        <Route path={routes.DOCTOR_ACCOUNT}>
+                            <DoctorAccount></DoctorAccount>
                         </Route>
                     </Switch>
                 </Content>
@@ -91,4 +71,4 @@ const PatientSidebar = () => {
     )
 }
 
-export default PatientSidebar
+export default MedicSidebar

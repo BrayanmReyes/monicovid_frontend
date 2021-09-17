@@ -49,6 +49,24 @@ class MedicalService {
         }
     }
 
+    async getOxygenReports(patientId) {
+        try {
+            const response = await axiosInstance.get(`/medical-risks-api/oxygens/reports`, { params: { patient_id: patientId }});
+            return response;
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    }
+
+    async getTemperatureReports(patientId) {
+        try {
+            const response = await axiosInstance.get(`/medical-risks-api/temperatures/reports`, { params: { patient_id: patientId }});
+            return response;
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    }
+
     async saveTemperatureRecord(temperature) {
         try {
             const data = {

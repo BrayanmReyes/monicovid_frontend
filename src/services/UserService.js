@@ -57,6 +57,25 @@ class UserService {
         }
     }
 
+    async editDoctor(data, doctorId) {
+        try {
+            const doctorData = {
+                first_name: data.firstName,
+                last_name: data.lastName,
+                email: data.email,
+                password: data.password,
+                phone: data.phone,
+                address: data.address,
+                dni: data.dni,
+                speciality: data.speciality,
+            }
+            const response = await axiosInstance.put(`/profiles-api/doctors/${doctorId}`, doctorData);
+            return response;
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    }
+
     async getContactsByUserId(userId) {
         try {
             const response = await axiosInstance.get(`/profiles-api/contacts`, { params: { patient_id: userId }});

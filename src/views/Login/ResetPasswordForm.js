@@ -30,7 +30,7 @@ const ResetPasswordForm = () => {
         <Form name="resetPassword" layout="vertical" onFinish={submit} onFinishFailed={failedSubmit}>
             <h1 className={styles.createAccount}>Reestablece tu contraseña</h1>
             <Form.Item className={styles.formItem} label="Contraseña">
-                <Form.Item name="password" noStyle rules={passwordRules()}>
+                <Form.Item name="password" noStyle rules={passwordRules(true)}>
                     <Input.Password className={styles.input} placeholder='••••••••'></Input.Password>
                 </Form.Item>
             </Form.Item>

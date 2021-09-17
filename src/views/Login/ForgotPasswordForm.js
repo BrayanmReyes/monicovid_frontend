@@ -31,7 +31,7 @@ const ForgotPasswordForm = () => {
         <Form name="forgotPassword" layout="vertical" onFinish={submit} onFinishFailed={failedSubmit}>
             <h1 className={styles.createAccount}>Recupera tu cuenta</h1>
             <Form.Item className={styles.formItem} label="Correo electrónico">
-                <Form.Item name="email" noStyle rules={emailRules()}>
+                <Form.Item name="email" noStyle rules={emailRules(true)}>
                     <Input className={styles.input} placeholder='medico@gmail.com'></Input>
                 </Form.Item>
                     <p style={{ fontSize: 9.5 }}>Nunca compartiremos su correo con nadie más.</p>

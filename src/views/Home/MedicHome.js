@@ -1,9 +1,10 @@
 import React from 'react'
+import MedicSidebar from '../../components/MedicSidebar'
 
 const MedicHome = () => {
     return (
         <div>
-            <h1>Médico</h1>
+            <MedicSidebar></MedicSidebar>
         </div>
     )
 }

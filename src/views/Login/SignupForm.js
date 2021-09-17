@@ -42,7 +42,7 @@ const SignupForm = () => {
                 </Row>
             </Form.Item>
             <Form.Item className={styles.formItem} label="DNI">
-                <Form.Item name="dni" noStyle rules={dniRules()}>
+                <Form.Item name="dni" noStyle rules={dniRules(true)}>
                     <Input className={styles.input} maxLength="8" placeholder='98765432'></Input>
                 </Form.Item>
                 <p style={{ fontSize: 9.5 }}>Nunca compartiremos su DNI con nadie más.</p>
@@ -61,20 +61,20 @@ const SignupForm = () => {
                 </Col>
             </Row>
             <Form.Item className={styles.formItem} label="Correo electrónico">
-                <Form.Item name="email" noStyle rules={emailRules()}>
+                <Form.Item name="email" noStyle rules={emailRules(true)}>
                     <Input className={styles.input} placeholder='medico@gmail.com'></Input>
                 </Form.Item>
                 <p style={{ fontSize: 9.5 }}>Nunca compartiremos su correo con nadie más.</p>
             </Form.Item>
             <Row className={styles.formItemCols}>
                 <Col xs={24} sm={24} md={24} lg={11} xl={11}>
-                    <Form.Item label="Contraseña" name="password" rules={passwordRules()}>
+                    <Form.Item label="Contraseña" name="password" rules={passwordRules(true)}>
                         <Input.Password className={styles.input} placeholder='••••••••'></Input.Password>
                     </Form.Item>
                 </Col>
                 <Col xs={0} sm={0} md={0} lg={2} xl={2}></Col>
                 <Col xs={24} sm={24} md={24} lg={11} xl={11}>
-                    <Form.Item label="Confirmación" name="confirmation" rules={passwordRules()}>
+                    <Form.Item label="Confirmación" name="confirmation" rules={passwordRules(true)}>
                         <Input.Password className={styles.input} placeholder='••••••••'></Input.Password>
                     </Form.Item>
                 </Col>

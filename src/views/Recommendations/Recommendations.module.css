@@ -11,5 +11,10 @@
 }
 
 .space {
-    margin: 1rem;
+    margin: 0.8rem;
+}
+
+.link {
+    font-size: 1.5rem;
+    padding: 0;
 }

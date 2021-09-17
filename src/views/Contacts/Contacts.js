@@ -16,10 +16,12 @@ const Contacts = () => {
 
     const [loading, setLoading] = useState(false);
 
+    const userInfo = sessionStorage.getItem('userInfo');
+    const user = JSON.parse(userInfo);
+
     useEffect(() => {
         if (!loading) {
-            const userId = sessionStorage.getItem('userId');
-            UserService.getContactsByUserId(userId).then((response) => {
+            UserService.getContactsByUserId(user.id).then((response) => {
                 let data = response.data;
                 data.forEach(f => f.visible = false);
                 setContacts(data);
@@ -51,8 +53,7 @@ const Contacts = () => {
     const addContact = () => {
         setLoading(true);
         addForm.validateFields().then((values) => {
-            const userId = sessionStorage.getItem('userId');
-            UserService.addContactToUser(values, userId).then((response) => {
+            UserService.addContactToUser(values, user.id).then((response) => {
                 if (response.status === 201) {
                     addForm.resetFields();
                     message.success("Contacto creado correctamente.");
@@ -111,10 +112,10 @@ const Contacts = () => {
                         <Form.Item label="Nombre" name="name" rules={defaultRules('nombre')}>
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Número de teléfono" name="phone" rules={phoneRules()}>
+                        <Form.Item label="Número de teléfono" name="phone" rules={phoneRules(true)}>
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Correo electrónico" name="email" rules={emailRules()}>
+                        <Form.Item label="Correo electrónico" name="email" rules={emailRules(true)}>
                             <Input />
                         </Form.Item>
                     </Form>
@@ -137,10 +138,10 @@ const Contacts = () => {
                                         <Form.Item label="Nombre" name="name" rules={defaultRules('nombre')}>
                                             <Input />
                                         </Form.Item>
-                                        <Form.Item label="Número de teléfono" name="phone" rules={phoneRules()}>
+                                        <Form.Item label="Número de teléfono" name="phone" rules={phoneRules(true)}>
                                             <Input />
                                         </Form.Item>
-                                        <Form.Item label="Correo electrónico" name="email" rules={emailRules()}>
+                                        <Form.Item label="Correo electrónico" name="email" rules={emailRules(true)}>
                                             <Input />
                                         </Form.Item>
                                     </Form>
