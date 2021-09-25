@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { AuthProvider } from './shared/context';
 import NotFound from './shared/NotFound';
 import routes from './shared/routes';
 import Home from './views/Home/Home';
@@ -26,6 +25,8 @@ function App() {
         <Route path={routes.RECOMMENDATIONS} component={Home} />
         <Route path={routes.NEW_REPORT} component={Home} />
         <Route path={routes.GRAPHS} component={Home} />
+        <Route path={routes.PATIENTS} component={Home} />
+        <Route path={routes.SEARCH_PATIENTS} component={Home} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

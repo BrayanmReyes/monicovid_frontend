@@ -10,6 +10,15 @@ class UserService {
         }
     }
 
+    async getPatients() {
+        try {
+            const response = await axiosInstance.get(`/profiles-api/patients`);
+            return response;
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    }
+
     async getPatient(patientId) {
         try {
             const response = await axiosInstance.get(`/profiles-api/patients/${patientId}`);

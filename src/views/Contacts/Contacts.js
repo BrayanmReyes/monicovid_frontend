@@ -36,7 +36,6 @@ const Contacts = () => {
                 break;
             case 'E':
                 setEditModalVisible(true);
-                console.log('id', contact.id);
                 editForm.setFieldsValue({
                     id: contact.id,
                     name: contact.name,

@@ -5,9 +5,11 @@ import { Line } from 'react-chartjs-2';
 const OxygenGraph = () => {
     const [chartData, setChartData] = useState({});
 
+    const userInfo = sessionStorage.getItem('userInfo');
+    const user = JSON.parse(userInfo);
+
     useEffect(() => {
-        const userId = sessionStorage.getItem('userId');
-        MedicalService.getOxygenReports(userId).then((response) => {
+        MedicalService.getOxygenReports(user.id).then((response) => {
             if (response.status === 200) {
                 if (response.data.length > 0) {
                     setChartData({

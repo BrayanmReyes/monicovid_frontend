@@ -1,6 +1,6 @@
-import { Button, Layout, Menu, Row, Col } from 'antd';
+import { Button, Layout, Menu, Row, Col, Modal } from 'antd';
 import { React, useState, useEffect } from 'react'
-import { TeamOutlined, FileDoneOutlined, MedicineBoxOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { TeamOutlined, FileDoneOutlined, MedicineBoxOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined, LogoutOutlined } from '@ant-design/icons';
 import styles from './Sidebar.module.css';
 import routes from '../shared/routes';
 import { Switch, Route, useHistory } from 'react-router';
@@ -16,6 +16,7 @@ const PatientSidebar = () => {
 
     const [collapsed, setCollapsed] = useState(false);
     const [title, setTitle] = useState('¡Bienvenido a Monicovid!');
+    const [logoutModal, setLogoutModal] = useState(false);
 
     const toggle = () => { setCollapsed(!collapsed) }
 
@@ -26,8 +27,17 @@ const PatientSidebar = () => {
     }, []);
 
     const keySelected = (key) => {
-        history.push(key.item.props.link);
-        setTitle(key.item.props.title);
+        if (key.key !== '5') {
+            history.push(key.item.props.link);
+            setTitle(key.item.props.title);
+        } else {
+            setLogoutModal(true);
+        }
+    }
+
+    const logout = () => {
+        sessionStorage.clear();
+        history.push(routes.LOGIN);
     }
 
     return (
@@ -47,6 +57,12 @@ const PatientSidebar = () => {
                     <Menu.Item className={styles.item} key="4" icon={<UserOutlined />} title="Cuenta" link={routes.PATIENT_ACCOUNT}>
                         Cuenta
                     </Menu.Item>
+                    <Menu.Item className={styles.item} key="5" icon={<LogoutOutlined />} title="Cerrar sesión">
+                        Cerrar sesión
+                    </Menu.Item>
+                    <Modal visible={logoutModal} okText="Sí" cancelText="No" onOk={() => logout()} onCancel={() => setLogoutModal(false)}>
+                        ¿Desea cerrar sesión?
+                    </Modal>
                 </Menu>
             </Sider>
             <Layout>

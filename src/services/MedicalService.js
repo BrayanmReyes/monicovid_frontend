@@ -90,6 +90,41 @@ class MedicalService {
             console.log('error: ', error);
         }
     }
+
+    async getPatientsByDoctorId(doctorId) {
+        try {
+            const response = await axiosInstance.get('/medical-monitoring-api/monitoring/patients', { params: { doctor_id: doctorId }})
+            return response;
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    }
+
+    async assignPatientsForDoctor(doctorId, patientId) {
+        try {
+            const data = {
+                doctor_id: doctorId,
+                patient_id: patientId
+            }
+            const response = await axiosInstance.post('/medical-monitoring-api/monitoring', data);
+            return response;
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    }
+
+    async unassignPatientsForDoctor(doctorId, patientId) {
+        try {
+            const data = {
+                doctor_id: doctorId,
+                patient_id: patientId
+            }
+            const response = await axiosInstance.delete('/medical-monitoring-api/monitoring', { data: data });
+            return response;
+        } catch (error) {
+            console.log('error: ', error);
+        }
+    }
 }
 
 export default new MedicalService();
