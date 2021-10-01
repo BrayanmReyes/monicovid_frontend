@@ -25,6 +25,8 @@ const Contacts = () => {
                 let data = response.data;
                 data.forEach(f => f.visible = false);
                 setContacts(data);
+            }).catch(() => {
+                message.error('Error del servicio.');
             })
         }
     }, [ loading ])
@@ -62,6 +64,8 @@ const Contacts = () => {
                     setLoading(false);
                     message.warning('Error al crear contacto. Intente nuevamente.');
                 }
+            }).catch(() => {
+                message.error('Error del servicio.');
             });
         }).catch(() => {
             message.warning("Introduzca correctamente los campos");
@@ -81,6 +85,8 @@ const Contacts = () => {
                     setLoading(false);
                     message.warning('Error al editar contacto. Intente nuevamente.');
                 }
+            }).catch(() => {
+                message.error('Error del servicio.');
             });
         }).catch(() => {
             message.warning("Introduzca correctamente los campos");

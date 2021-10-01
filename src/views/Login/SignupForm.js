@@ -19,6 +19,8 @@ const SignupForm = () => {
                     message.success('¡El usuario se ha registrado correctamente!');
                     history.push(routes.LOGIN);
                 }
+            }).catch(() => {
+                message.error('Error del servicio.');
             });
         } else {
             message.warning('La contraseña y la confirmación no coinciden.');

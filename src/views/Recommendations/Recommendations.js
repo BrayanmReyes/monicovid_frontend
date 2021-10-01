@@ -26,6 +26,8 @@ const Recommendations = () => {
                     } else {
                         message.warning('Error al actualizar el perfil. Por favor inténtelo de nuevo');
                     }
+                }).catch(() => {
+                    message.error('Error del servicio.');
                 })
             },
         });

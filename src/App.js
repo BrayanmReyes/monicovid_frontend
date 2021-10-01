@@ -27,6 +27,7 @@ function App() {
         <Route path={routes.GRAPHS} component={Home} />
         <Route path={routes.PATIENTS} component={Home} />
         <Route path={routes.SEARCH_PATIENTS} component={Home} />
+        <Route path={routes.MEDICAL_CENTERS} component={Home} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

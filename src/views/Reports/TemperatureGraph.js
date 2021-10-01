@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import MedicalService from '../../services/MedicalService';
 import { Line } from 'react-chartjs-2';
+import { message } from 'antd';
 
-const TemperatureGraph = () => {
+const TemperatureGraph = (userId) => {
     const [chartData, setChartData] = useState({});
 
-    const userInfo = sessionStorage.getItem('userInfo');
-    const user = JSON.parse(userInfo);
-
     useEffect(() => {
-        MedicalService.getTemperatureReports(user.id).then((response) => {
+        MedicalService.getTemperatureReports(userId.userId).then((response) => {
             if (response.status === 200) {
                 if (response.data.length > 0) {
                     setChartData({
@@ -28,6 +26,8 @@ const TemperatureGraph = () => {
                     });
                 }
             }
+        }).catch(() => {
+            message.error('Error del servicio.');
         });
     }, []);
 

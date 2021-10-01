@@ -32,7 +32,9 @@ const NewReport = () => {
             } else {
                 message.warning('Error al registrar la temperatura. Vuelva a intentar.');
             }
-        })
+        }).catch(() => {
+            message.error('Error del servicio.');
+        });
     }
 
     const saveOxygen = () => {
@@ -44,7 +46,9 @@ const NewReport = () => {
             } else {
                 message.warning('Error al registrar la saturación de oxígeno. Vuelva a intentar.');
             }
-        })
+        }).catch(() => {
+            message.error('Error del servicio.');
+        });
     }
 
     const saveReport = () => {
@@ -63,7 +67,9 @@ const NewReport = () => {
             } else {
                 message.warning('Error al registrar reporte. Vuelva a intentar.');
             }
-        })
+        }).catch(() => {
+            message.error('Error del servicio.');
+        });
     }
  
     const next = () => {

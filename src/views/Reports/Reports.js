@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import routes from '../../shared/routes';
 import styles from './Reports.module.css'
 import MedicalService from '../../services/MedicalService';
+import { message } from 'antd';
 
 const Reports = () => {
     const history = useHistory();
@@ -44,14 +45,17 @@ const Reports = () => {
                     }
                 });
             }
+        }).catch(() => {
+            message.error('Error del servicio.');
         });
-        
     }, []);
 
     const getSymptoms = (reportId) => {
         setSymptomsModal(true);
         MedicalService.getSymptomsByHealthReport(reportId).then((response) => {
             setSymptoms(response.data);
+        }).catch(() => {
+            message.error('Error del servicio.');
         });
     }
 

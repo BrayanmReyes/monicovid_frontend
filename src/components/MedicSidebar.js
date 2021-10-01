@@ -20,7 +20,7 @@ const MedicSidebar = () => {
     const history = useHistory();
 
     useEffect(() => {
-        history.push(routes.DOCTOR_ACCOUNT);
+        history.push(routes.PATIENTS);
     }, []);
 
     const keySelected = (key) => {

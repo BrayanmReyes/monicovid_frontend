@@ -13,4 +13,5 @@ export default Object.freeze({
     GRAPHS: "/graphs",
     PATIENTS: "/patients",
     SEARCH_PATIENTS: "/search-patients",
+    MEDICAL_CENTERS: "/medical-centers",
 });

@@ -26,8 +26,12 @@ const LoginForm = () => {
                     } else {
                         message.error('No se ha podido recuperar la información del usuario. Intente nuevamente');
                     }
+                }).catch(() => {
+                    message.error('Error del servicio.');
                 });
             }
+        }).catch(() => {
+            message.error('Error del servicio.');
         });
     }
     

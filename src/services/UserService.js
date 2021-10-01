@@ -6,7 +6,7 @@ class UserService {
             const response = await axiosInstance.get(`/profiles-api/users/${userId}`);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -15,7 +15,7 @@ class UserService {
             const response = await axiosInstance.get(`/profiles-api/patients`);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -24,7 +24,7 @@ class UserService {
             const response = await axiosInstance.get(`/profiles-api/patients/${patientId}`);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -33,7 +33,7 @@ class UserService {
             const response = await axiosInstance.get(`/profiles-api/patients/${patientId}/comorbidities`);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -42,7 +42,7 @@ class UserService {
             const response = await axiosInstance.get(`/profiles-api/doctors/${doctorId}`);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -62,7 +62,7 @@ class UserService {
             const response = await axiosInstance.put(`/profiles-api/patients/${patientId}`, patientData);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -81,7 +81,7 @@ class UserService {
             const response = await axiosInstance.put(`/profiles-api/doctors/${doctorId}`, doctorData);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -90,7 +90,7 @@ class UserService {
             const response = await axiosInstance.get(`/profiles-api/contacts`, { params: { patient_id: userId }});
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -99,7 +99,7 @@ class UserService {
             const response = await axiosInstance.post(`/profiles-api/contacts`, data, { params: { patient_id: userId }});
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -113,7 +113,7 @@ class UserService {
             const response = await axiosInstance.put(`/profiles-api/contacts/${contactId}`, contact);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -122,7 +122,7 @@ class UserService {
             const response = await axiosInstance.delete(`/profiles-api/contacts/${contactId}`);
             return response;
         } catch (error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 }

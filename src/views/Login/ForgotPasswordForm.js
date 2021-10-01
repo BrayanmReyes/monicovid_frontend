@@ -20,6 +20,8 @@ const ForgotPasswordForm = () => {
                     message.error("No se pudo enviar el mensaje.")
                     break;
             }
+        }).catch(() => {
+            message.error('Error del servicio.');
         });
     }
     

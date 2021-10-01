@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import MedicalService from '../../services/MedicalService';
 import { Line } from 'react-chartjs-2';
+import { message } from 'antd';
 
-const OxygenGraph = () => {
+const OxygenGraph = (userId) => {
     const [chartData, setChartData] = useState({});
 
-    const userInfo = sessionStorage.getItem('userInfo');
-    const user = JSON.parse(userInfo);
-
     useEffect(() => {
-        MedicalService.getOxygenReports(user.id).then((response) => {
+        MedicalService.getOxygenReports(userId.userId).then((response) => {
             if (response.status === 200) {
                 if (response.data.length > 0) {
                     setChartData({
@@ -28,6 +26,8 @@ const OxygenGraph = () => {
                     });
                 }
             }
+        }).catch(() => {
+            message.error('Error del servicio.');
         });
     }, []);
 

@@ -19,6 +19,8 @@ const ResetPasswordForm = () => {
             } else {
                 message.error("No se ha podido cambiar la contraseña. Token inválido.")
             }
+        }).catch(() => {
+            message.error('Error del servicio.');
         });
     }
     

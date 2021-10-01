@@ -14,6 +14,8 @@ const DoctorAccount = () => {
         if (user.type === 'doctor') {
             UserService.getDoctor(user.id).then((response) => {
                 fillForm(response.data);
+            }).catch(() => {
+                message.error('Error del servicio.');
             });
         }
     }, []);
@@ -39,6 +41,8 @@ const DoctorAccount = () => {
                 } else {
                     message.warning('Error al actualizar el perfil. Por favor inténtelo de nuevo');
                 }
+            }).catch(() => {
+                message.error('Error del servicio.');
             });
         } else {
             message.warning('La contraseña y la confirmación no coinciden.');

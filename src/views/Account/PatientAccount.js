@@ -18,7 +18,11 @@ const PatientAccount = () => {
                 fillForm(response.data);
                 UserService.getPatientComorbidities(user.id).then((response) => {
                     setComorbidities(response.data.map(c => c.id));
+                }).catch(() => {
+                    message.error('Error del servicio.');
                 });
+            }).catch(() => {
+                message.error('Error del servicio.');
             });
         }
     }, []);
@@ -44,6 +48,8 @@ const PatientAccount = () => {
                 } else {
                     message.warning('Error al actualizar el perfil. Por favor inténtelo de nuevo');
                 }
+            }).catch(() => {
+                message.error('Error del servicio.');
             });
         } else {
             message.warning('La contraseña y la confirmación no coinciden.');

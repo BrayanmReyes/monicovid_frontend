@@ -1,4 +1,5 @@
 import axiosInstance from "../utils/axiosInstance";
+import { message } from 'antd';
 
 class AuthenticationService {
 
@@ -15,7 +16,7 @@ class AuthenticationService {
             const response = await axiosInstance.post('/auth-api/register', newUser);
             return response;
         } catch(error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -28,7 +29,7 @@ class AuthenticationService {
             const response = await axiosInstance.post('/auth-api/login', login);
             return response;
         } catch(error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -40,7 +41,7 @@ class AuthenticationService {
             const response = await axiosInstance.post('/auth-api/forgot-password', forgotPassword);
             return response;
         } catch(error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 
@@ -53,7 +54,7 @@ class AuthenticationService {
             const response = await axiosInstance.post('/auth-api/reset-password', resetPassword);
             return response;
         } catch(error) {
-            console.log('error: ', error);
+            return null;
         }
     }
 }

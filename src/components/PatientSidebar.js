@@ -10,9 +10,13 @@ import PatientAccount from '../views/Account/PatientAccount';
 import Recommendations from '../views/Recommendations/Recommendations';
 import NewReport from '../views/Reports/NewReport';
 import Graphs from '../views/Reports/Graphs';
+import MedicalCenters from '../views/Centers/MedicalCenters';
 
 const PatientSidebar = () => {
     const { Header, Content, Footer, Sider } = Layout;
+
+    const userInfo = sessionStorage.getItem('userInfo');
+    const user = JSON.parse(userInfo);
 
     const [collapsed, setCollapsed] = useState(false);
     const [title, setTitle] = useState('¡Bienvenido a Monicovid!');
@@ -51,7 +55,7 @@ const PatientSidebar = () => {
                     <Menu.Item className={styles.item} key="2" icon={<TeamOutlined />} title="Contactos" link={routes.CONTACTS}>
                         Contactos
                     </Menu.Item>
-                    <Menu.Item className={styles.item} key="3" icon={<MedicineBoxOutlined />} title="Centros médicos">
+                    <Menu.Item className={styles.item} key="3" icon={<MedicineBoxOutlined />} title="Centros médicos" link={routes.MEDICAL_CENTERS}>
                         Centros médicos
                     </Menu.Item>
                     <Menu.Item className={styles.item} key="4" icon={<UserOutlined />} title="Cuenta" link={routes.PATIENT_ACCOUNT}>
@@ -97,7 +101,10 @@ const PatientSidebar = () => {
                             <PatientAccount></PatientAccount>
                         </Route>
                         <Route path={routes.GRAPHS}>
-                            <Graphs></Graphs>
+                            <Graphs userId={user.id}></Graphs>
+                        </Route>
+                        <Route path={routes.MEDICAL_CENTERS}>
+                            <MedicalCenters></MedicalCenters>
                         </Route>
                     </Switch>
                 </Content>
