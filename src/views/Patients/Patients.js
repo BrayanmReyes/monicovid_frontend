@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Table, Space, Popconfirm, message, Modal, Button, Collapse } from 'antd'
 import Column from 'antd/lib/table/Column'
-import { DeleteOutlined, DiffOutlined, AuditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, DiffOutlined, AuditOutlined, FileExcelOutlined } from '@ant-design/icons';
 import MedicalService from '../../services/MedicalService';
 import UserService from '../../services/UserService';
 import Graphs from '../Reports/Graphs';
 import styles from './Patients.module.css'
+import fileDownload from 'js-file-download';
 
 const Patients = () => {
     const { Panel } = Collapse;
@@ -82,6 +83,14 @@ const Patients = () => {
         });
     }
 
+    const downloadReport = (report) => {
+        MedicalService.getExcelByHealthReport(report.id).then((response) => {
+            fileDownload(response.data, `reporte_${report.id}.xlsx`);
+        }).catch(() => {
+            message.error('Error del servicio.');
+        });
+    }
+
     return (
         <div style={{ width: '90%', margin: '1.5rem auto' }}>
             <Table dataSource={patients} rowKey="id">
@@ -93,12 +102,14 @@ const Patients = () => {
                     (text, patient) => (
                         <Space size="middle">
                             <Button type="primary" icon={<AuditOutlined />} onClick={() => patientDetails(patient)}>Ver detalles</Button>
-                            <Modal title="Detalles del paciente" visible={detailsModal} onOk={() => setDetailsModal(false)} okText="Listo" cancelButtonProps={{ style: { display: 'none' } }}>
+                            <Modal title="Detalles del paciente" visible={detailsModal} onOk={() => setDetailsModal(false)} onCancel={() => setDetailsModal(false)} okText="Listo" cancelButtonProps={{ style: { display: 'none' } }}>
                                 <ul>
                                     <li><strong>Nombre: </strong> { details.first_name }</li>
                                     <li><strong>Apellidos: </strong> { details.last_name }</li>
                                     <li><strong>DNI: </strong> { details.dni }</li>
                                     <li><strong>Correo electrónico: </strong> { details.email }</li>
+                                    <li><strong>¿Recuperado?: </strong> { details.recovered? 'Sí' : 'No' }</li>
+                                    { details.recovered && <li><strong>Fecha de recuperación: </strong> { details.recovered_date }</li> }
                                 </ul>
                             </Modal>
                             <Button type="primary" icon={<DiffOutlined />} onClick={() => patientReports(patient)}>Ver reportes</Button>
@@ -106,6 +117,7 @@ const Patients = () => {
                                 title="Reportes del paciente"
                                 visible={reportsModal}
                                 onOk={() => setReportsModal(false)}
+                                onCancel={() => setReportsModal(false)}
                                 okText="Listo"
                                 cancelButtonProps={{ style: { display: 'none' } }}
                                 width="70%"
@@ -131,13 +143,25 @@ const Patients = () => {
                                                             { reports[index].symptoms_quantity > 0
                                                                 ? <>
                                                                     <Button className={styles.buttonNoMargin} type="primary" onClick={() => getSymptoms(reports[index].id)}>Ver</Button>
-                                                                    <Modal title="Síntomas" visible={symptomsModal} onOk={() => setSymptomsModal(false)} okText="Entendido" cancelButtonProps={{ style: { display: 'none' } }}>
+                                                                    <Modal title="Síntomas" visible={symptomsModal} onOk={() => setSymptomsModal(false)} onCancel={() => setSymptomsModal(false)} okText="Entendido" cancelButtonProps={{ style: { display: 'none' } }}>
                                                                         <ul>{ symptoms.map(function(s, i) {
                                                                             return (<li key={i}>{s.name}</li>)
                                                                         })}</ul>
                                                                     </Modal>
                                                                 </>
                                                                 : <p>No se reportaron</p>
+                                                            }
+                                                        </Space>
+                                                    )
+                                                } />
+                                                <Column title="Descargar" key="download" render={
+                                                    (text, report, index) => (
+                                                        <Space size="middle">
+                                                            { reports[index].symptoms_quantity > 0
+                                                                ? <>
+                                                                    <Button icon={<FileExcelOutlined />} type="default" onClick={() => downloadReport(report)}>Descargar reporte</Button>
+                                                                </>
+                                                                : <p>-</p>
                                                             }
                                                         </Space>
                                                     )

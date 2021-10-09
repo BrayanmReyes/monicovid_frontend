@@ -91,7 +91,7 @@ const Reports = () => {
                                 { reports[index].symptoms_quantity > 0
                                     ? <>
                                         <Button className={styles.buttonNoMargin} type="primary" onClick={() => getSymptoms(reports[index].id)}>Ver</Button>
-                                        <Modal title="Síntomas" visible={symptomsModal} onOk={() => setSymptomsModal(false)} okText="Entendido" cancelButtonProps={{ style: { display: 'none' } }}>
+                                        <Modal title="Síntomas" visible={symptomsModal} onOk={() => setSymptomsModal(false)} onCancel={() => setSymptomsModal(false)} okText="Entendido" cancelButtonProps={{ style: { display: 'none' } }}>
                                             <ul>{ symptoms.map(function(s, i) {
                                                 return (<li key={i}>{s.name}</li>)
                                             })}</ul>

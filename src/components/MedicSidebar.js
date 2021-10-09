@@ -39,15 +39,9 @@ const MedicSidebar = () => {
     
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider className={styles.sidebar} breakpoint="lg" collapsible trigger={null} collapsed={collapsed}>
+            <Sider className={styles.sidebar} breakpoint="lg" collapsedWidth="0" collapsible trigger={null} collapsed={collapsed} onBreakpoint={broken => setCollapsed(broken)}>
                 <img style={{ margin: '1rem auto', display: 'block' }} src="/icon_64.png" alt="Monicovid logo"/>
                 <Menu theme="dark" className={styles.menu} mode="inline" onSelect={(key) => keySelected(key)}>
-                    {/* <Menu.Item className={styles.item} key="1" icon={<FileDoneOutlined />} title="Reportes" link={routes.REPORTS}>
-                        Reportes
-                    </Menu.Item>
-                    <Menu.Item className={styles.item} key="2" icon={<TeamOutlined />} title="Contactos" link={routes.CONTACTS}>
-                        Contactos
-                    </Menu.Item> */}
                     <Menu.Item className={styles.item} key="1" icon={<MedicineBoxOutlined />} title="Mis pacientes" link={routes.PATIENTS}>
                         Mis pacientes
                     </Menu.Item>

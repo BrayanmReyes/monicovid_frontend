@@ -18,3 +18,13 @@
     font-size: 1.5rem;
     padding: 0;
 }
+
+.container {
+    display: inline-block;
+}
+
+@media screen and (max-width: 992px) {
+    .container { display: flex; flex-flow: column; }
+    .two { order: 1 }
+    .one { order: 2 }
+}

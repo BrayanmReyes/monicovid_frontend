@@ -9,7 +9,6 @@ import MedicalService from '../../services/MedicalService';
 const SearchPatients = () => {
     const { Option } = Select;
 
-    const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('name');
     const [patients, setPatients] = useState([]);
     const [assignedPatients, setAssignedPatients] = useState([]);
@@ -27,7 +26,7 @@ const SearchPatients = () => {
             UserService.getPatients().then((response) => {
                 if (response.status === 200) {
                     setPatients(response.data);
-                    setFilteredPatients(response.data);
+                    setFilteredPatients([]);
                 }
                 MedicalService.getPatientsByDoctorId(user.id).then((response) => {
                     setAssignedPatients(response.data);
@@ -47,7 +46,6 @@ const SearchPatients = () => {
                 message.success("El paciente se le ha sido asignado correctamente");
                 setAssignPatientModal(false);
                 setLoading(false);
-                // history.push(routes.PATIENTS);
             } else {
                 message.error("Error al asignar paciente")
             }
@@ -57,7 +55,7 @@ const SearchPatients = () => {
     }
 
     const selectBefore = (
-        <Select value={searchedColumn} defaultValue="name" onChange={(value) => setSearchedColumn(value)}>
+        <Select value={searchedColumn} defaultValue="name" style={{ width: '7rem' }} onChange={(value) => setSearchedColumn(value)}>
           <Option value="dni">DNI</Option>
           <Option value="name">Nombre</Option>
         </Select>
@@ -68,15 +66,14 @@ const SearchPatients = () => {
     }
 
     const search = (value) => {
-        setSearchText(value);
         if (value) {
             if (searchedColumn === 'name') {
-                setFilteredPatients(patients.filter(p => p.first_name.toUpperCase().includes(searchText.toUpperCase()) || p.last_name.toUpperCase().includes(searchText.toUpperCase())));
+                setFilteredPatients(patients.filter(p => p.first_name.toUpperCase().includes(value.toUpperCase()) || p.last_name.toUpperCase().includes(value.toUpperCase())));
             } else {
-                setFilteredPatients(patients.filter(p => p.dni.toUpperCase().includes(searchText.toUpperCase())));
+                setFilteredPatients(patients.filter(p => p.dni.toUpperCase().includes(value.toUpperCase())));
             }
         } else {
-            setFilteredPatients(patients);
+            setFilteredPatients([]);
         }
     }
 
@@ -88,7 +85,7 @@ const SearchPatients = () => {
                     onChange={(event) => search(event.target.value)}>
                 </Input>
             </div>
-            <Table dataSource={filteredPatients} rowKey="id">
+            <Table dataSource={filteredPatients} rowKey="id" locale={{ emptyText: 'Ingrese su búsqueda para ver resultados' }}>
                 <Column title="DNI" dataIndex="dni" key="dni" />
                 <Column title="Nombre" dataIndex="first_name" key="first_name" />
                 <Column title="Apellidos" dataIndex="last_name" key="last_name" />
