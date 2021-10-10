@@ -45,12 +45,12 @@ const Recommendations = () => {
                 <p className={styles.parrafos}>Actualmente también hay Centros de Aislamiento Temporal y Seguimiento (CATS) en todas las regiones del país.</p>
                 <p className={styles.parrafos}>
                     Si deseas conocer más información haz clic
-                    <a href="https://www.gob.pe/8733-cuidar-a-un-paciente-sospechoso-de-haber-contraido-coronavirus-covid-19"> aquí</a>
+                    <a href="https://www.gob.pe/8733-cuidar-a-un-paciente-sospechoso-de-haber-contraido-coronavirus-covid-19" style={{ color: '#F25270' }}> aquí</a>
                 </p>
                 <div className={styles.space}>&nbsp;</div>
             </div>
             <div className={styles.two}>
-                <p className={styles.parrafos}>Si ya te encuentras recuperado, haz clic <Button className={styles.link} type="link" onClick={() => recovered()}>aquí.</Button> Una vez recuperado, ya no se enviarán correos de alerta.</p>
+                <p className={styles.parrafos} style={{ color: '#F25270' }}>Si ya te encuentras recuperado, haz clic <Button className={styles.link} type="link" onClick={() => recovered()}>aquí.</Button> Una vez recuperado, ya no se enviarán correos de alerta.</p>
             </div>
         </div>
     )

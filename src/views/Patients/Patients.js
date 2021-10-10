@@ -91,6 +91,14 @@ const Patients = () => {
         });
     }
 
+    const downloadLastThreeDaysReport = () => {
+        MedicalService.getLastThreeDaysReportExcelByUserId(reports[0].patient.id).then((response) => {
+            fileDownload(response.data, `reporte_ultimos_dias_${reports[0].patient.id}.xlsx`);
+        }).catch(() => {
+            message.error('Error del servicio.');
+        });
+    }
+
     return (
         <div style={{ width: '90%', margin: '1.5rem auto' }}>
             <Table dataSource={patients} rowKey="id">
@@ -125,6 +133,7 @@ const Patients = () => {
                                 { reports.length > 0 &&
                                     <Collapse accordion>
                                         <Panel header="Reportes" key="1">
+                                            <Button type="danger" icon={<FileExcelOutlined />} style={{ margin: '0.5rem 0' }} onClick={() => downloadLastThreeDaysReport()}>Descargar reportes de los últimos 3 días</Button>
                                             <Table dataSource={reports} rowKey="id">
                                                 <Column title="Fecha" dataIndex="register_date" key="register_date"></Column>
                                                 <Column title="Temperatura °C" dataIndex={['temperature', 'value']} key="temperature" render={
@@ -157,12 +166,7 @@ const Patients = () => {
                                                 <Column title="Descargar" key="download" render={
                                                     (text, report, index) => (
                                                         <Space size="middle">
-                                                            { reports[index].symptoms_quantity > 0
-                                                                ? <>
-                                                                    <Button icon={<FileExcelOutlined />} type="default" onClick={() => downloadReport(report)}>Descargar reporte</Button>
-                                                                </>
-                                                                : <p>-</p>
-                                                            }
+                                                            <Button icon={<FileExcelOutlined />} type="default" onClick={() => downloadReport(report)}>Descargar reporte</Button>
                                                         </Space>
                                                     )
                                                 } />

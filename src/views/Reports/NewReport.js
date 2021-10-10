@@ -9,6 +9,9 @@ const NewReport = () => {
     const { Step } = Steps;
     const { TextArea } = Input;
 
+    const userInfo = sessionStorage.getItem('userInfo');
+    const user = JSON.parse(userInfo);
+
     const [page, setPage] = useState(0);
     const [cancelModal, setCancelModal] = useState(false);
 
@@ -59,8 +62,8 @@ const NewReport = () => {
             oxygenId: oxygenId,
             temperatureId: temperatureId
         }
-        const userId = sessionStorage.getItem('userId');
-        MedicalService.addReportsToUser(newReportData, userId).then((response) => {
+        
+        MedicalService.addReportsToUser(newReportData, user.id).then((response) => {
             if (response.status === 201) {
                 message.success('Reporte registrado con éxito.');
                 back();

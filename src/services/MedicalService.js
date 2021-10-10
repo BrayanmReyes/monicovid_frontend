@@ -58,6 +58,15 @@ class MedicalService {
         }
     }
 
+    async getLastThreeDaysReportExcelByUserId(userId) {
+        try {
+            const response = await axiosInstance.get(`/medical-monitoring-api/health_reports/${userId}/last-three-days-excel`, { responseType: 'blob' });
+            return response;
+        } catch (error) {
+            return null;
+        }
+    }
+
     async getOxygenReports(patientId) {
         try {
             const response = await axiosInstance.get(`/medical-risks-api/oxygens/reports`, { params: { patient_id: patientId }});
