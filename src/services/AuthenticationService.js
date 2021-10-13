@@ -1,5 +1,4 @@
 import axiosInstance from "../utils/axiosInstance";
-import { message } from 'antd';
 
 class AuthenticationService {
 
